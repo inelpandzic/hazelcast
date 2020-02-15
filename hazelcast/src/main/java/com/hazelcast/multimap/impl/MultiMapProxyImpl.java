@@ -110,7 +110,7 @@ public class MultiMapProxyImpl<K, V>
 
         NodeEngine nodeEngine = getNodeEngine();
         Data dataKey = nodeEngine.toData(key);
-        MultiMapResponse result = getAllInternal(dataKey);
+        MultiMapResponse result = getInternal(dataKey);
         return result.getObjectCollection(nodeEngine);
     }
 

@@ -22,7 +22,7 @@ import com.hazelcast.config.MultiMapConfig;
 import com.hazelcast.core.EntryEventType;
 import com.hazelcast.multimap.impl.operations.CountOperation;
 import com.hazelcast.multimap.impl.operations.DeleteOperation;
-import com.hazelcast.multimap.impl.operations.GetAllOperation;
+import com.hazelcast.multimap.impl.operations.GetOperation;
 import com.hazelcast.multimap.impl.operations.MultiMapOperationFactory;
 import com.hazelcast.multimap.impl.operations.MultiMapOperationFactory.OperationFactoryType;
 import com.hazelcast.multimap.impl.operations.MultiMapResponse;
@@ -73,9 +73,9 @@ public abstract class MultiMapProxySupport extends AbstractDistributedObject<Mul
         }
     }
 
-    protected MultiMapResponse getAllInternal(Data dataKey) {
+    protected MultiMapResponse getInternal(Data dataKey) {
         try {
-            GetAllOperation operation = new GetAllOperation(name, dataKey);
+            GetOperation operation = new GetOperation(name, dataKey);
             operation.setThreadId(ThreadUtil.getThreadId());
             return invoke(operation, dataKey);
         } catch (Throwable throwable) {
@@ -266,7 +266,7 @@ public abstract class MultiMapProxySupport extends AbstractDistributedObject<Mul
                 } else if (operation instanceof RemoveOperation || operation instanceof RemoveAllOperation
                         || operation instanceof DeleteOperation) {
                     getService().getLocalMultiMapStatsImpl(name).incrementRemoveLatencyNanos(System.nanoTime() - startTimeNanos);
-                } else if (operation instanceof GetAllOperation) {
+                } else if (operation instanceof GetOperation) {
                     getService().getLocalMultiMapStatsImpl(name).incrementGetLatencyNanos(System.nanoTime() - startTimeNanos);
                 }
             } else {

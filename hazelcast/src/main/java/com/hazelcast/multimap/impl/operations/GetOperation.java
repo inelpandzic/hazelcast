@@ -31,12 +31,12 @@ import com.hazelcast.spi.impl.operationservice.WaitNotifyKey;
 
 import java.util.Collection;
 
-public class GetAllOperation extends AbstractKeyBasedMultiMapOperation implements BlockingOperation, ReadonlyOperation {
+public class GetOperation extends AbstractKeyBasedMultiMapOperation implements BlockingOperation, ReadonlyOperation {
 
-    public GetAllOperation() {
+    public GetOperation() {
     }
 
-    public GetAllOperation(String name, Data dataKey) {
+    public GetOperation(String name, Data dataKey) {
         super(name, dataKey);
     }
 
